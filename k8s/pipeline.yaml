@@ -4,27 +4,27 @@ metadata:
   name: dotnetcore-api
 spec:
   params:
-  - default: pipelines-dotnetcore-api
-    name: APP_NAME
-    type: string
-  - default: https://github.com/OisinCruise/dotnetcore-ci-ocp-pipeline.git
-    name: GIT_REPO
-    type: string
-  - default: master
-    name: GIT_REVISION
-    type: string
-  - default: quay.io/oisincruise/dotnetcore
-    name: IMAGE_NAME
-    type: string
-  - default: .
-    name: PATH_CONTEXT
-    type: string
-  - default: 'https://github.com/OisinCruise/dotnetcore-ci-ocp-pipeline.git'
-    name: CONFIG_GIT_REPO
-    type: string
-  - default: develop
-    name: CONFIG_GIT_REVISION
-    type: string
+    - default: pipelines-dotnetcore-api
+      name: APP_NAME
+      type: string
+    - default: https://github.com/OisinCruise/dotnetcore-ci-ocp-pipeline.git
+      name: GIT_REPO
+      type: string
+    - default: master
+      name: GIT_REVISION
+      type: string
+    - default: quay.io/oisincruise/dotnetcore
+      name: IMAGE_NAME
+      type: string
+    - default: .
+      name: PATH_CONTEXT
+      type: string
+    - default: 'https://github.com/OisinCruise/dotnetcore-gitops.git'
+      name: CONFIG_GIT_REPO
+      type: string
+    - default: develop
+      name: CONFIG_GIT_REVISION
+      type: string
   tasks:
     - name: fetch-repository
       params:
@@ -46,6 +46,7 @@ spec:
       workspaces:
         - name: output
           workspace: workspace
+
     - name: build-and-push
       params:
         - name: IMAGE
@@ -70,6 +71,7 @@ spec:
       workspaces:
         - name: source
           workspace: workspace
+
     - name: git-update-deployment
       params:
         - name: GIT_REPOSITORY
@@ -91,6 +93,7 @@ spec:
         name: git-update-deployment
       workspaces:
         - name: workspace
-          workspace: workspace 
-workspaces:
-  - name: workspace
+          workspace: workspace
+
+  workspaces:
+    - name: workspace
